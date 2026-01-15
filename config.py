@@ -3,6 +3,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def get_secret(key, default=None):
+    try:
+        import streamlit as st
+        return st.secrets.get(key, os.getenv(key, default))
+    except:
+        return os.getenv(key, default)
+
 class Config:
     
     REQUEST_TIMEOUT = 10
@@ -17,12 +24,12 @@ class Config:
     
     RETRIEVAL_TOP_K = 4
     
-    GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+    GROQ_API_KEY = get_secret("GROQ_API_KEY")
     LLM_MODEL_NAME = "llama-3.3-70b-versatile"
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
     LLM_TEMPERATURE = 0
     
-    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    PINECONE_API_KEY = get_secret("PINECONE_API_KEY")
     VECTOR_STORE_PROVIDER = "pinecone" # Enforced
     PINECONE_INDEX_NAME = "website-content"
 
