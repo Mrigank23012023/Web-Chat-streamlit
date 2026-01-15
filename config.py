@@ -25,9 +25,9 @@ class Config:
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 150
     
-    EMBEDDING_PROVIDER = "openai"
-    EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dimensions
-    OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
+    EMBEDDING_PROVIDER = "jina"
+    EMBEDDING_MODEL = "jina-embeddings-v2-base-en"  # 768 dimensions
+    JINA_API_KEY = get_secret("JINA_API_KEY")
     
     RETRIEVAL_TOP_K = 4
     
@@ -48,8 +48,8 @@ class Config:
         if not cls.PINECONE_API_KEY:
             print("⚠️ WARNING: PINECONE_API_KEY is missing. RAG features will fail.")
         
-        if not cls.OPENAI_API_KEY:
-            print("⚠️ WARNING: OPENAI_API_KEY is missing. Embeddings will fail.")
+        if not cls.JINA_API_KEY:
+            print("⚠️ WARNING: JINA_API_KEY is missing. Embeddings will fail.")
         pass
 
 Config.validate()

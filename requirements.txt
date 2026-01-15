@@ -16,8 +16,6 @@ langchain-groq>=0.1.0
 groq>=0.5.0
 
 # Embeddings & Vector Store
-openai>=1.0.0
-langchain-openai>=0.1.0
 pinecone-client
 langchain-pinecone
 
