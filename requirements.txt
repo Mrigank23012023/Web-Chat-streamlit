@@ -1,6 +1,6 @@
 # Core Framework
-streamlit==1.28.0
-tornado==6.1
+streamlit>=1.39.0
+# tornado removed (streamlit handles its own dependencies)
 
 # Web Crawling & Parsing
 requests>=2.31.0
@@ -9,7 +9,6 @@ trafilatura>=1.8.0
 lxml_html_clean
 
 # LLM & AI Framework (RAG Pipeline)
-# Relaxed pins to allow resolution of compatible versions, targeting 0.3.x ecosystem if needed
 langchain>=0.2.0
 langchain-community>=0.2.0
 langchain-core>=0.2.0
@@ -22,6 +21,7 @@ sentence-transformers>=2.5.1
 chromadb>=0.4.24
 pinecone-client
 langchain-pinecone
+pysqlite3-binary
 
 # Utilities
 python-dotenv
