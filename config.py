@@ -25,7 +25,9 @@ class Config:
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 150
     
-    EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+    EMBEDDING_PROVIDER = "openai"
+    EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dimensions
+    OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
     
     RETRIEVAL_TOP_K = 4
     
@@ -45,6 +47,9 @@ class Config:
         
         if not cls.PINECONE_API_KEY:
             print("⚠️ WARNING: PINECONE_API_KEY is missing. RAG features will fail.")
+        
+        if not cls.OPENAI_API_KEY:
+            print("⚠️ WARNING: OPENAI_API_KEY is missing. Embeddings will fail.")
         pass
 
 Config.validate()
