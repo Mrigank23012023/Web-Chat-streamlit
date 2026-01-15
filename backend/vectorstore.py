@@ -23,8 +23,11 @@ class VectorStore:
             index.delete(delete_all=True)
             logger.info(f"Cleared Pinecone index '{self.index_name}'.")
         except Exception as e:
-            logger.error(f"Failed to reset Pinecone index: {e}")
-            raise RuntimeError("Could not reset Pinecone index. Ensure it exists.")
+            if "NOT_FOUND" in str(e) or "404" in str(e):
+                logger.warning(f"Index '{self.index_name}' does not exist yet. Skipping reset.")
+            else:
+                logger.error(f"Failed to reset Pinecone index: {e}")
+                raise RuntimeError("Could not reset Pinecone index.")
 
     def create_collection(self, documents: List[Document], embedding_function):
         if not documents:
