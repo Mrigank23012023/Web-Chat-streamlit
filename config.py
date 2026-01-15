@@ -5,8 +5,6 @@ load_dotenv()
 
 class Config:
     
-    CHROMA_DB_PATH = "chroma_db"
-    
     REQUEST_TIMEOUT = 10
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
     
@@ -25,7 +23,7 @@ class Config:
     LLM_TEMPERATURE = 0
     
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-    VECTOR_STORE_PROVIDER = os.getenv("VECTOR_STORE_PROVIDER", "chroma").lower()
+    VECTOR_STORE_PROVIDER = "pinecone" # Enforced
     PINECONE_INDEX_NAME = "website-content"
 
     @classmethod
@@ -33,8 +31,8 @@ class Config:
         if not cls.GROQ_API_KEY:
              print("⚠️ WARNING: GROQ_API_KEY is missing. RAG features will fail.")
         
-        if cls.VECTOR_STORE_PROVIDER == "pinecone" and not cls.PINECONE_API_KEY:
-            print("⚠️ WARNING: PINECONE_API_KEY is missing but provider is set to 'pinecone'. RAG features will fail.")
+        if not cls.PINECONE_API_KEY:
+            print("⚠️ WARNING: PINECONE_API_KEY is missing. RAG features will fail.")
         pass
 
 Config.validate()

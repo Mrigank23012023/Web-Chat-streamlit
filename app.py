@@ -1,20 +1,9 @@
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 import streamlit as st
 import time
 import logging
 from frontend.ui import UI
 from backend.auth import Auth
 from config import Config
-
-from backend.crawler import Crawler
-from backend.extractor import Extractor
-from backend.cleaner import Cleaner
-from backend.chunker import Chunker
-from backend.vectorstore import VectorStore
-from backend.qa_chain import QAChain 
 
 logging.basicConfig(
     level=logging.INFO,
